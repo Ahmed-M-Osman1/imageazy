@@ -1,0 +1,14 @@
+{
+  "name": "imageasy",
+  "version": "1.0.0",
+  "description": "ImagEasy - Image process API as a part of udacity nanodegree.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ahmed M.Osman",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  }
+}
