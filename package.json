@@ -4,11 +4,19 @@
   "description": "ImagEasy - Image process API as a part of udacity nanodegree.",
   "main": "index.js",
   "scripts": {
+    "build": "npx tsc",
+    "lint": "eslint src/*.ts",
+    "lint:f": "eslint src/*.ts --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ahmed M.Osman",
   "license": "ISC",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
     "typescript": "^4.8.3"
   }
