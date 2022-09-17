@@ -17,5 +17,6 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': 1,
+    '@typescript-eslint/no-inferrable-types': 'off',
   },
 };
