@@ -1,5 +1,11 @@
-const myFunc = (num: number): number => {
-  return num * num;
-};
+import express from 'express';
+import routes from './routes';
 
-export default myFunc;
+const app = express();
+const localport: number = 3002;
+
+app.use(routes);
+
+app.listen(localport, () => {
+  console.log('App is working on port: ' + localport);
+});
