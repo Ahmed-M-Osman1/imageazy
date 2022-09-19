@@ -2,6 +2,8 @@ import { Router, Request, Response } from 'express';
 import path from 'path';
 import findPhoto from './findPhoto';
 import resizeImage from '../../util/sharp';
+import { existsSync } from 'fs';
+
 const resizeAPI = Router();
 
 resizeAPI.get('/', (req: Request, res: Response) => {
