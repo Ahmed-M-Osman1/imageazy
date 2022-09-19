@@ -7,7 +7,7 @@ const resizeImage = (
 ) => {
   return sharp(inputFile)
     .resize(hieght, width)
-    .toFile(outputFile + '.jpg');
+    .toFile(outputFile + '_' + hieght + '_' + width + '.jpg');
 };
 
 export default resizeImage;

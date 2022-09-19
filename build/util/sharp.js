@@ -7,6 +7,6 @@ var sharp_1 = __importDefault(require("sharp"));
 var resizeImage = function (inputFile, hieght, width, outputFile) {
     return (0, sharp_1.default)(inputFile)
         .resize(hieght, width)
-        .toFile(outputFile + '.jpg');
+        .toFile(outputFile + '_' + hieght + '_' + width + '.jpg');
 };
 exports.default = resizeImage;
