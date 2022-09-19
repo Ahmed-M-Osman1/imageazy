@@ -11,3 +11,4 @@ app.use(routes_1.default);
 app.listen(localport, function () {
     console.log('App is working on port: ' + localport);
 });
+exports.default = app;

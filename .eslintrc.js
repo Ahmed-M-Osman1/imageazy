@@ -17,6 +17,7 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': 1,
+    // inferreable type make the eslint remove types from argument (which is agnaist the project rule) so I make it off.
     '@typescript-eslint/no-inferrable-types': 'off',
   },
 };

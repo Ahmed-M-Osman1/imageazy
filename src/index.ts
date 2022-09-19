@@ -9,3 +9,5 @@ app.use(routes);
 app.listen(localport, () => {
   console.log('App is working on port: ' + localport);
 });
+
+export default app;

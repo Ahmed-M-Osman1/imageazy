@@ -39,51 +39,70 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var path_1 = __importDefault(require("path"));
-var findPhoto_1 = __importDefault(require("./findPhoto"));
-var fs_1 = require("fs");
-var sharp_1 = __importDefault(require("../../util/sharp"));
-var resizeAPI = (0, express_1.Router)();
-resizeAPI.get('/', function (req, res) {
-    // get the name of the file, width and hieght.
-    var name = req.query.filename;
-    var width = Number(req.query.width);
-    var hieght = Number(req.query.hieght);
-    // get both folder (input and output) path.
-    var ImagePath = path_1.default.resolve('./images');
-    var OutputPath = (path_1.default.resolve('./') + '/output/');
-    // know the cached Photo path (to check of it's exists)
-    var cachedPhotoName = OutputPath + '/' + name + '_' + hieght + '_' + width + '.jpg';
-    // return the photo (I make it as function so I can reuse it)
-    var cropPhoto = function (ImagePath, name, hieght, width, OutputPath) { return __awaiter(void 0, void 0, void 0, function () {
+var supertest_1 = __importDefault(require("supertest"));
+var index_1 = __importDefault(require("../../index"));
+var request = (0, supertest_1.default)(index_1.default);
+// test the first endpoint "/"
+describe("Test the home route '/'", function () {
+    it('Just call the home endpoint to test it work when user enter URL "/" ', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, sharp_1.default)(ImagePath + '/' + name + '.jpg', hieght, width, OutputPath + '/' + name)];
+                case 0: return [4 /*yield*/, request.get('/').expect(200)];
                 case 1:
                     _a.sent();
-                    return [2 /*return*/, res.status(200).sendFile(cachedPhotoName)];
+                    return [2 /*return*/];
             }
         });
-    }); };
-    // check if the photo is cashed or the photo is exit in the image folder.
-    var isPhotoCashed = (0, fs_1.existsSync)(cachedPhotoName);
-    var isPhotoExist = (0, findPhoto_1.default)(ImagePath, name);
-    if (name === undefined || isNaN(width) || isNaN(hieght)) {
-        return res
-            .status(400)
-            .send("Bad Request. Ether File name, Width or Hieght is missing. please use: resize?filename='File Name'&width=' Number'&hieght=' Number' in your URL");
-    }
-    else if (isPhotoCashed) {
-        return res.status(200).sendFile(cachedPhotoName);
-    }
-    else if (isPhotoExist) {
-        return cropPhoto(ImagePath, name, hieght, width, OutputPath);
-    }
-    else {
-        return res
-            .status(400)
-            .send('The file you Request is not available please choose anthor file.');
-    }
+    }); });
 });
-exports.default = resizeAPI;
+// test the second endpoint "/resize"
+describe("Test the route without sending any parameters '/resize'", function () {
+    it('Call the /resize without filename', function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, request.get('/resize').expect(400)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+});
+describe("Test the route with parameters '/resize'", function () {
+    it('Call the /resize with non-exist photo name (wrong parameters)', function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, request
+                        .get('/resize?filename=ahmed&width=100&hieght=100')
+                        .expect(400)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it('Call the /resize with exist photo on the output folder', function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, request
+                        .get('/resize?filename=icelandwaterfall&width=100&hieght=100')
+                        .expect(200)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it('Call the /resize with exist photo on the image folder', function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, request
+                        .get('/resize?filename=encenadaport&width=500&hieght=500')
+                        .expect(200)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+});
