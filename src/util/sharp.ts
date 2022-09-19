@@ -6,7 +6,7 @@ const resizeImage = (
   outputFile: string
 ) => {
   return sharp(inputFile)
-    .resize(hieght, width)
+    .resize(width, hieght)
     .toFile(outputFile + '_' + hieght + '_' + width + '.jpg');
 };
 
