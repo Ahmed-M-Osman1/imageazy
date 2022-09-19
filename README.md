@@ -22,6 +22,10 @@ Then, start the project through:
 
 `npm start`
 
+### This project run on localhost:3002
+
+### To resiz your photo enter this URL : resize?filename='File Name'&width=' Number'&hieght=' Number'
+
 ## 📖 Declartion:
 
 This project is a part of FWD - Full stack developer scholarship. Special thanks to the Ministry of Communications and Information Technology (MCIT) - EGYPT for launches the Future Work is Digital initiative which is powered by Information Technology Industry Development Agency (ITIDA).
