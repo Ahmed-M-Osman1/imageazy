@@ -22,9 +22,9 @@ Then, start the project through:
 
 `npm start`
 
-### This project run on localhost:3002
+#### This project run on localhost:3002
 
-### To resiz your photo enter this URL : resize?filename='File Name'&width=' Number'&hieght=' Number'
+#### To resiz your photo enter this URL : resize?filename='File Name'&width=' Number'&hieght=' Number'
 
 ## 📖 Declartion:
 
