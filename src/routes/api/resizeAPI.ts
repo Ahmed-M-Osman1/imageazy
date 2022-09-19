@@ -14,9 +14,14 @@ resizeAPI.get('/', (req: Request, res: Response) => {
   // get all file names on the images folder.
   const ImagePath = path.resolve('./images') as string;
   const OutputPath = (path.resolve('./') + '/out/') as string;
-  const x = findPhoto(OutputPath, name);
-  console.log(x);
+  const isPhotoCashed = existsSync(
+    OutputPath + '/' + name + '_' + hieght + '_' + width + '.jpg'
+  );
+  console.log(isPhotoCashed);
+
+  const isPhotoExist = findPhoto(ImagePath, name);
   // use fs readdir function to read the folder:
+  console.log('=>', isPhotoExist);
   const photoFound = async () => {
     console.log('start photo fun');
     await resizeImage(
@@ -30,5 +35,16 @@ resizeAPI.get('/', (req: Request, res: Response) => {
   const returnThePhoto = () => {
     res.sendFile(OutputPath + '/' + name + '_' + hieght + '_' + width + '.jpg');
   };
+  if (isPhotoCashed) {
+    return res.sendFile(
+      OutputPath + '/' + name + '_' + hieght + '_' + width + '.jpg'
+    );
+  } else if (isPhotoExist) {
+    return photoFound();
+  } else {
+    return res
+      .status(400)
+      .send('Bad request, query parameter (name) is required.');
+  }
 });
 export default resizeAPI;
