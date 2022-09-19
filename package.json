@@ -4,6 +4,7 @@
   "description": "ImagEasy - Image process API as a part of udacity nanodegree.",
   "main": "index.js",
   "scripts": {
+	"start": "node build/index.js",
     "build": "npx tsc",
     "dev": "nodemon src/index.ts",
     "lint": "eslint src/*.ts",
