@@ -14,9 +14,10 @@ resizeAPI.get('/', (req: Request, res: Response) => {
   // get all file names on the images folder.
   const ImagePath = path.resolve('./images') as string;
   const OutputPath = (path.resolve('./') + '/out/') as string;
-  const isPhotoCashed = existsSync(
-    OutputPath + '/' + name + '_' + hieght + '_' + width + '.jpg'
-  );
+  const cachedPhotoName =
+    OutputPath + '/' + name + '_' + hieght + '_' + width + '.jpg';
+
+  const isPhotoCashed = existsSync(cachedPhotoName);
   console.log(isPhotoCashed);
 
   const isPhotoExist = findPhoto(ImagePath, name);
@@ -33,14 +34,18 @@ resizeAPI.get('/', (req: Request, res: Response) => {
     returnThePhoto();
   };
   const returnThePhoto = () => {
-    res.sendFile(OutputPath + '/' + name + '_' + hieght + '_' + width + '.jpg');
+    res.sendFile(cachedPhotoName);
   };
   if (isPhotoCashed) {
-    return res.sendFile(
-      OutputPath + '/' + name + '_' + hieght + '_' + width + '.jpg'
-    );
+    return res.sendFile(cachedPhotoName);
   } else if (isPhotoExist) {
     return photoFound();
+  } else if (width === undefined || hieght === undefined) {
+    return res
+      .status(400)
+      .send(
+        "Bad Request. Ether Width or Hieght is missing. please use: filename='File Name'&width=' Number'&hieght=' Number'"
+      );
   } else {
     return res
       .status(400)
