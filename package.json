@@ -4,13 +4,14 @@
   "description": "ImagEasy - Image process API as a part of udacity nanodegree.",
   "main": "index.js",
   "scripts": {
-	"start": "node build/index.js",
+    "start": "node build/index.js",
     "build": "npx tsc",
     "dev": "nodemon src/index.ts",
     "lint": "eslint src/*.ts",
     "lint:f": "eslint src/*.ts --fix",
     "jasmine": "jasmine",
-    "test": "npm run build && npm run jasmine"
+    "test": "npm run build && npm run jasmine",
+    "prettier": "prettier --write '**/*.ts'"
   },
   "author": "Ahmed M.Osman",
   "license": "ISC",
