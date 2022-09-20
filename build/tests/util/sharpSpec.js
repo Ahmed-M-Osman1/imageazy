@@ -39,19 +39,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var sharp_1 = __importDefault(require("sharp"));
-var resizeImage = function (inputFile, hieght, width, outputFile) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        try {
-            (0, sharp_1.default)(inputFile)
-                .resize(width, hieght)
-                .toFile(outputFile + '_' + hieght + '_' + width + '.jpg');
-            return [2 /*return*/, true];
-        }
-        catch (err) {
-            return [2 /*return*/, false];
-        }
-        return [2 /*return*/];
-    });
-}); };
-exports.default = resizeImage;
+var sharp_1 = __importDefault(require("../../util/sharp"));
+var path_1 = __importDefault(require("path"));
+// test the first endpoint "/"
+describe('Test resizeImage function', function () {
+    var ImagePath = path_1.default.resolve('./images');
+    var OutputPath = (path_1.default.resolve('./') + '/output/');
+    it('Send exist parameters to resizeImage function', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, (0, sharp_1.default)(ImagePath + '/' + 'encenadaport.jpg', 100, 200, OutputPath + '/' + 'encenadaport')];
+                case 1:
+                    result = _a.sent();
+                    expect(result).toBeTrue();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+});

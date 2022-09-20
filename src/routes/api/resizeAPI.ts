@@ -26,13 +26,17 @@ resizeAPI.get('/', (req: Request, res: Response) => {
     width: number,
     OutputPath: string
   ) => {
-    await resizeImage(
-      ImagePath + '/' + name + '.jpg',
-      hieght,
-      width,
-      OutputPath + '/' + name
-    );
-    return res.status(200).sendFile(cachedPhotoName);
+    try {
+      await resizeImage(
+        ImagePath + '/' + name + '.jpg',
+        hieght,
+        width,
+        OutputPath + '/' + name
+      );
+      return res.status(200).sendFile(cachedPhotoName);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // check if the photo is cashed or the photo is exit in the image folder.

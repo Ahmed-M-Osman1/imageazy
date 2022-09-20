@@ -57,12 +57,20 @@ resizeAPI.get('/', function (req, res) {
     var cachedPhotoName = OutputPath + '/' + name + '_' + hieght + '_' + width + '.jpg';
     // return the photo (I make it as function so I can reuse it)
     var cropPhoto = function (ImagePath, name, hieght, width, OutputPath) { return __awaiter(void 0, void 0, void 0, function () {
+        var err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, sharp_1.default)(ImagePath + '/' + name + '.jpg', hieght, width, OutputPath + '/' + name)];
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, (0, sharp_1.default)(ImagePath + '/' + name + '.jpg', hieght, width, OutputPath + '/' + name)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/, res.status(200).sendFile(cachedPhotoName)];
+                case 2:
+                    err_1 = _a.sent();
+                    console.log(err_1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     }); };
